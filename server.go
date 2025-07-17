@@ -33,11 +33,13 @@ func AddBookHandler(w http.ResponseWriter, r *http.Request) {
 	id, err := strconv.Atoi(params["id"]) //перевожу параметр id в число (тк в структуре у меня ID - число)
 	if err != nil {
 		fmt.Println(err)
+		return
 	}
 
 	for _, value := range books { //иду по слайсу books и сравниваю параметр id с идентификатором книги
 		if value.ID == id {
 			json.NewEncoder(w).Encode(value)
+			return
 		}
 	}
 	json.NewEncoder(w).Encode(Book{}) //если не найден - вывожу пустую структуру книги
