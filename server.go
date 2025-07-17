@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -21,8 +22,10 @@ type Book struct {
 var books = []Book{}
 
 func BooksHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Books")
+	// fmt.Fprint(w, books)
+	json.NewEncoder(w).Encode(books)
 }
+
 func AddBookHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Add Book")
 }
